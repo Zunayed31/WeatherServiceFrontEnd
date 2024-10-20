@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Weather Dashboard";
+}
+
+@model WeatherServiceUserInterface.Models.ViewModel.GetTopLocationsViewModel;
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Weather Dashboard</h1>
+    <p></p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="vertical-align:middle; text-align:center">Cities</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var city in Model.Locations)
+                {
+                    <tr class="clickable-row" style="cursor: pointer;" onclick=" window.location='@Url.Action("Forecast", "Weather", new { locationKey = city.key, city = city.englishName })';">
+                        <td style="vertical-align:middle; text-align:center">
+                            @city.englishName
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>

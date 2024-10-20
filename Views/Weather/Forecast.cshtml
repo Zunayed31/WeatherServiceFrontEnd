@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Forecast";
+}
+<h1>@ViewData["Title"]</h1>
+
+@model WeatherServiceUserInterface.Models.ViewModel.GetDayForecastResponseViewModel;
+
+<body>
+    <p>@ViewBag.City's Weather Today</p>
+    <p>Headline: @Model.Forecast.headline.text</p>
+    <p>Category: @Model.Forecast.headline.category</p>
+    <p>Minimum Temperature: @Model.Forecast.dailyForecasts[0].temperature.minimum.value ° @Model.Forecast.dailyForecasts[0].temperature.minimum.unit</p>
+    <p>Maximum Temperature: @Model.Forecast.dailyForecasts[0].temperature.maximum.value ° @Model.Forecast.dailyForecasts[0].temperature.maximum.unit</p>
+    <p>Day: @Model.Forecast.dailyForecasts[0].day.iconPhrase</p>
+    @{
+        var url = string.Format("/images/icons/{0}.png", @Model.Forecast.dailyForecasts[0].day.icon);
+        <img class="mb-4 img-error" src="@url" />
+    }
+    <p>Night: @Model.Forecast.dailyForecasts[0].night.iconPhrase</p>
+    @{
+        var url1 = string.Format("/images/icons/{0}.png", @Model.Forecast.dailyForecasts[0].night.icon);
+        <img class="mb-4 img-error" src="@url1" />
+    }
+    <p><button class="btn btn-primary" onclick=" window.location='@Url.Action("Dashboard", "Weather")';">Back</button></p>
+</body>
